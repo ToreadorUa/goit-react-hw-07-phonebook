@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Button, FormContainer, Input } from './Form.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/sliceForm';
+import { addContactThunk } from 'redux/thunk';
 
 export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
 
   const handleChange = ({ target }) => {
@@ -36,10 +36,10 @@ export const Form = () => {
       const newContact = {
         id: nanoid(),
         name: name,
-        number: number,
+        phone: number,
       };
 
-      dispatch(addContact(newContact));
+      dispatch(addContactThunk(newContact));
       setName('');
       setNumber('');
     }
