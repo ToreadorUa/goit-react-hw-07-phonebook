@@ -1,32 +1,21 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { addContactThunk, getContactsThunk, delContactThunk } from './thunk';
+import * as sevices from './services';
+// import { getContacts } from 'api/apiContacts';
 
 const initialState = {
-  items: [],
+  contacts: [],
   isLoading: false,
   error: null,
 };
 
-const handlePending = state => (state.isLoading = true);
-const handleFulfilled = (state, action) => {
-  state.isLoading = false;
-  state.error = null;
-  state.items = action.payload;
-};
-const handleRejected = (state, action) => {
-  state.isLoading = false;
-  state.error = action.payload;
-};
-const handleAddFulfilled = (state, action) => {
-  state.isLoading = false;
-  state.error = null;
-  state.items = state.items.push(action.payload);
-};
-const handleDelFulfilled = (state, action) => {
-  state.isLoading = false;
-  state.error = null;
-  state.items = state.items.filter(el => el.id !== action.payload);
-};
+const {
+  handleFulfilled,
+  handleAddFulfilled,
+  handleDelFulfilled,
+  handlePending,
+  handleRejected,
+} = sevices;
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -57,22 +46,42 @@ const contactsSlice = createSlice({
 
 export default contactsSlice.reducer;
 
-// export const fetchContacts = () =>  {return async (dispatch) =>
-//   {try {
-//     // Индикатор загрузки
-//     dispatch(contactsSlice.actions.pending());
-//     // HTTP-запрос
-//     const data = await getContacts();
+// const contactsSlice = createSlice({
+//   name: 'contacts',
+//   initialState,
+//   reducers: {
+//     pending(state, action) {
+//       state.isLoading = true;
+//     },
+//     fulfilled(state, action) {
+//       state.isLoading = false;
+//       state.error = null;
+//       state.items = action.payload;
+//     },
+//     rejected(state, action) {
+//       state.isLoading = false;
+//       state.error = action.payload;
+//     },
+//   },
+// });
 
-//     // Обработка данных
-//     dispatch(contactsSlice.actions.fulfilled(data));
-//   } catch (e) {
+// export const fetchContacts = () => {
+//   return async dispatch => {
+//     try {
+//       // Индикатор загрузки
+//       dispatch(contactsSlice.actions.pending());
+//       // HTTP-запрос
+//       const data = await getContacts();
+
+//       // Обработка данных
+//       dispatch(contactsSlice.actions.fulfilled(data));
+//     } catch (e) {
 //       console.log(e);
-//     // Обработка ошибки
-//     dispatch(contactsSlice.actions.error(e));
+//       // Обработка ошибки
+//       dispatch(contactsSlice.actions.error(e));
 //     }
-// }
-// }
+//   };
+// };
 // export const addContactFetch = () => {
 
 //   }

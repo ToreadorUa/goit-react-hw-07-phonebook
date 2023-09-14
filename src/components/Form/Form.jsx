@@ -8,7 +8,7 @@ export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
 
   const handleChange = ({ target }) => {
@@ -25,9 +25,7 @@ export const Form = () => {
   const handleSub = e => {
     // создание нового контакта с проверкой на существование такого же
     e.preventDefault();
-    if (
-      contacts.some(el => el.name.toLowerCase().includes(name.toLowerCase()))
-    ) {
+    if (contacts.some(el => el.name.toLowerCase() === name.toLowerCase())) {
       alert(`${name} is already exist`);
       setName('');
       setNumber('');

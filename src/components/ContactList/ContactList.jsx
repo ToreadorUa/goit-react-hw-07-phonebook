@@ -1,4 +1,3 @@
-// import { getContacts } from 'api/apiContacts';
 import { Button } from 'components/Form/Form.styled';
 import { Loader } from 'components/Loader/Loader';
 import { useEffect } from 'react';
@@ -12,9 +11,9 @@ export const ContactList = () => {
   useEffect(() => {
     dispatch(getContactsThunk());
   }, [dispatch]);
-  const contacts = useSelector(state => state.contacts.items);
+
+  const { contacts, isLoading, error } = useSelector(state => state.contacts);
   const filter = useSelector(state => state.filter);
-  const isLoading = useSelector(state => state.contacts.isLoading);
 
   const filterArray = contacts.filter(({ name }) =>
     name.toLowerCase().includes(filter.toLowerCase())
@@ -46,6 +45,7 @@ export const ContactList = () => {
           </Li>
         ))}
       </Ul>
+      {error && <div>{error}</div>}
     </>
   );
 };
