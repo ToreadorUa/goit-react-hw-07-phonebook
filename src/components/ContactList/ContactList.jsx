@@ -3,7 +3,7 @@ import { Loader } from 'components/Loader/Loader';
 import { useEffect } from 'react';
 import { Rings } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import { contactsSelector, filterSelector } from 'redux/selectors';
+import { contactsSelector } from 'redux/selectors';
 import { delContactThunk, getContactsThunk } from 'redux/thunk';
 import { styled } from 'styled-components';
 
