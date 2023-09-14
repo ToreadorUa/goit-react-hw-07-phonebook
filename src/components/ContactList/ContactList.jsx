@@ -3,6 +3,7 @@ import { Loader } from 'components/Loader/Loader';
 import { useEffect } from 'react';
 import { Rings } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
+import { contactsSelector, filterSelector } from 'redux/selectors';
 import { delContactThunk, getContactsThunk } from 'redux/thunk';
 import { styled } from 'styled-components';
 
@@ -12,7 +13,7 @@ export const ContactList = () => {
     dispatch(getContactsThunk());
   }, [dispatch]);
 
-  const { contacts, isLoading, error } = useSelector(state => state.contacts);
+  const { contacts, isLoading, error } = useSelector(contactsSelector);
   const filter = useSelector(state => state.filter);
 
   const filterArray = contacts.filter(({ name }) =>

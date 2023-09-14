@@ -15,6 +15,7 @@ const {
   handleDelFulfilled,
   handlePending,
   handleRejected,
+  thunkTypesArr,
 } = sevices;
 
 const contactsSlice = createSlice({
@@ -25,22 +26,8 @@ const contactsSlice = createSlice({
       .addCase(getContactsThunk.fulfilled, handleFulfilled)
       .addCase(addContactThunk.fulfilled, handleAddFulfilled)
       .addCase(delContactThunk.fulfilled, handleDelFulfilled)
-      .addMatcher(
-        isAnyOf(
-          getContactsThunk.pending,
-          addContactThunk.pending,
-          delContactThunk.pending
-        ),
-        handlePending
-      )
-      .addMatcher(
-        isAnyOf(
-          getContactsThunk.rejected,
-          addContactThunk.rejected,
-          delContactThunk.rejected
-        ),
-        handleRejected
-      );
+      .addMatcher(isAnyOf(...thunkTypesArr('pending')), handlePending)
+      .addMatcher(isAnyOf(...thunkTypesArr('rejected')), handleRejected);
   },
 });
 

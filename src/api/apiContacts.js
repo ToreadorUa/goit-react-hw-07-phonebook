@@ -14,7 +14,8 @@ export const getContacts = async () => {
 
 export const addContact = async contact => {
   try {
-    await axios.post(`${BASE_URL}/contacts`, contact);
+    const resp = await axios.post(`${BASE_URL}/contacts`, contact);
+    return resp.data;
   } catch (error) {
     return error.message;
   }
@@ -22,7 +23,9 @@ export const addContact = async contact => {
 
 export const delContact = async id => {
   try {
-    await axios.delete(`${BASE_URL}/contacts/${id}`);
+    const resp = await axios.delete(`${BASE_URL}/contacts/${id}`);
+    console.log(resp.data.id);
+    return resp.data.id;
   } catch (error) {
     return error.message;
   }

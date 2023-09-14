@@ -3,12 +3,13 @@ import { nanoid } from 'nanoid';
 import { Button, FormContainer, Input } from './Form.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContactThunk } from 'redux/thunk';
+import { contactsSelector } from 'redux/selectors';
 
 export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(state => state.contacts.contacts);
+  const { contacts } = useSelector(contactsSelector);
   const dispatch = useDispatch();
 
   const handleChange = ({ target }) => {
